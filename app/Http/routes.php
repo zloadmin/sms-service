@@ -1,16 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
+// index page
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+//set lang
+Route::get('setlocale/{locale}', function ($locale) {
+
+    if (in_array($locale, \Config::get('app.locales'))) Session::put('locale', $locale);
+
+    return redirect()->back();
+
 });

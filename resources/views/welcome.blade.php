@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ц<!DOCTYPE html>
 <html>
     <head>
         <title>Laravel</title>
