@@ -35,4 +35,11 @@ return [
         'secret' => '',
     ],
 
+    'github' => [
+        'client_id' => '183acd7de4db72ff4ff5',
+        'client_secret' => 'e59491fbccf3a7672b9522426e6baeb952d3a9c8',
+        'redirect' => 'http://sms-service1.ru/callback',
+    ],
+
+
 ];

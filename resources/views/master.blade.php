@@ -19,7 +19,7 @@
                     <a href="/auth/register" class="btn btn-primary">Sign Up</a>
                 @endif
 
-
+                    <a href="{!!URL::to('oauth/github')!!}" class="btn">Login with Github</a>
 
                 <div class="btn-group">
                     <a href="/setlocale/en" class="btn btn-default">English</a>
