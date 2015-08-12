@@ -38,8 +38,12 @@ return [
     'github' => [
         'client_id' => '183acd7de4db72ff4ff5',
         'client_secret' => 'e59491fbccf3a7672b9522426e6baeb952d3a9c8',
-        'redirect' => 'http://sms-service1.ru/callback',
+        'redirect' => 'http://sms-service1.ru/oauth/callback/github',
     ],
 
-
+    'google' => [
+        'client_id' => '894218435353-22kq4ru4svhp09imoe0p86fcufg8tnh4.apps.googleusercontent.com',
+        'client_secret' => 'gTafqusH4vPi_TQ_heVpLMUH',
+        'redirect' => 'http://sms-service1.ru/oauth/callback/google',
+    ],
 ];

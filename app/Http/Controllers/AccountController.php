@@ -13,7 +13,7 @@ use Socialite;
 
 class AccountController extends Controller
 {
-
+    //github
     public function github_redirect() {
         return Socialite::with('github')->redirect();
     }
@@ -22,7 +22,19 @@ class AccountController extends Controller
         $user = Socialite::with('github')->user();
         // Do your stuff with user data.
         print_r($user);die;
+
     }
 
+    //google
+    public function google_redirect() {
+        return Socialite::with('google')->redirect();
+    }
+
+    public function google() {
+        $user = Socialite::with('google')->user();
+        // Do your stuff with user data.
+        print_r($user);die;
+
+    }
 
 }

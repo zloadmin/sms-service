@@ -18,9 +18,10 @@
                     <a href="/auth/login" class="btn btn-success">Log In</a>
                     <a href="/auth/register" class="btn btn-primary">Sign Up</a>
                 @endif
-
-                    <a href="{!!URL::to('oauth/github')!!}" class="btn">Login with Github</a>
-
+                <div class="btn-group">
+                    <a href="{!!URL::to('oauth/github')!!}" class="btn btn-default">Github</a>
+                    <a href="{!!URL::to('oauth/google')!!}" class="btn btn-default">Google+</a>
+                </div>
                 <div class="btn-group">
                     <a href="/setlocale/en" class="btn btn-default">English</a>
                     <a href="/setlocale/ru" class="btn btn-default">Русский</a>
