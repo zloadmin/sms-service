@@ -34,8 +34,9 @@ class AccountController extends Controller
 
     public function google() {
         $user = Socialite::with('google')->user();
-        // Do your stuff with user data.
-        print_r($user);die;
+        $finduser = User::FindOrCreateUser($user, 'google');
+        Auth::login($finduser);
+        return redirect('/');
 
     }
 

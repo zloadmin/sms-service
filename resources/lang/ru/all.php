@@ -6,5 +6,6 @@ return [
     'htmllang' => 'ru',
     'login' => 'Войти',
     'logout' => 'Выйти',
-
+    'hi' => 'Привет, ',
+    'language' => 'Язык',
 ];

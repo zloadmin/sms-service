@@ -36,7 +36,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['remember_token'];
 
-
+    /**
+     * @param $user
+     * @param $social_type
+     * @return User
+     */
     static function FindOrCreateUser($user, $social_type) {
 
 
@@ -62,6 +66,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         return $finduser;
+    }
+    static function UserName() {
+        $user_id = Auth::retrieveById();
+        dd($user_id);
     }
 
 }
