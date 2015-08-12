@@ -15,6 +15,10 @@ Route::get('setlocale/{locale}', function ($locale) {
 });
 
 
+Route::get('/oauth/logout', 'AccountController@getLogout');
+
+
+
 Route::get('/oauth/github', 'AccountController@github_redirect');
 Route::get('/oauth/google', 'AccountController@google_redirect');
 

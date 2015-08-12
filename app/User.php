@@ -8,6 +8,9 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use Socialite;
+
+
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
@@ -24,12 +27,41 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['*'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['remember_token'];
+
+
+    static function FindOrCreateUser($user, $social_type) {
+
+
+
+        $finduser = User::where('social_id', '=', $user->getId())->where('social_type', '=', $social_type)->first();
+
+
+        if(empty($finduser)) {
+
+            $newuser = new User;
+
+            $newuser->social_id = $user->getId();
+            $newuser->social_type = $social_type;
+            $newuser->nickname = $user->getNickname();
+            $newuser->name = $user->getName();
+            $newuser->email = $user->getEmail();
+            $newuser->avatar = $user->getAvatar();
+            $newuser->info = json_encode($user->user);
+
+            $newuser->save();
+
+            return $newuser;
+        }
+
+        return $finduser;
+    }
+
 }

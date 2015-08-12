@@ -13,15 +13,16 @@
         <div class="navbar-collapse collapse">
             <div class="navbar-form navbar-right">
                 @if((Auth::check()))
-                    <a class="btn btn-danger" href="/auth/logout">Log Out</a>
+                    <a class="btn btn-danger" href="{!!URL::to('oauth/logout')!!}">{{ trans('all.logout') }}</a>
                 @else
-                    <a href="/auth/login" class="btn btn-success">Log In</a>
-                    <a href="/auth/register" class="btn btn-primary">Sign Up</a>
+
+                    <div class="btn-group">
+                        <span class="btn btn-default">{{ trans('all.login') }}:</span>
+                        <a href="{!!URL::to('oauth/github')!!}" class="btn btn-default">Github</a>
+                        <a href="{!!URL::to('oauth/google')!!}" class="btn btn-default">Google+</a>
+                    </div>
                 @endif
-                <div class="btn-group">
-                    <a href="{!!URL::to('oauth/github')!!}" class="btn btn-default">Github</a>
-                    <a href="{!!URL::to('oauth/google')!!}" class="btn btn-default">Google+</a>
-                </div>
+
                 <div class="btn-group">
                     <a href="/setlocale/en" class="btn btn-default">English</a>
                     <a href="/setlocale/ru" class="btn btn-default">Русский</a>

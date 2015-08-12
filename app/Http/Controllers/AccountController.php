@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Redirect;
 use Socialite;
-
+use Auth;
 
 class AccountController extends Controller
 {
@@ -20,8 +21,9 @@ class AccountController extends Controller
 
     public function github() {
         $user = Socialite::with('github')->user();
-        // Do your stuff with user data.
-        print_r($user);die;
+        $finduser = User::FindOrCreateUser($user, 'github');
+        Auth::login($finduser);
+        return redirect('/');
 
     }
 
@@ -36,5 +38,16 @@ class AccountController extends Controller
         print_r($user);die;
 
     }
+
+
+
+
+    public function getLogout() {
+
+        Auth::logout();
+        return redirect('/');
+
+    }
+
 
 }
