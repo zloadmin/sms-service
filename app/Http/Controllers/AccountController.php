@@ -21,9 +21,7 @@ class AccountController extends Controller
 
     public function github() {
         $user = Socialite::with('github')->user();
-        $finduser = User::FindOrCreateUser($user, 'github');
-        Auth::login($finduser);
-        return redirect('/');
+        return User::FindOrCreateUserAuth($user, 'github');
 
     }
 
@@ -34,9 +32,8 @@ class AccountController extends Controller
 
     public function google() {
         $user = Socialite::with('google')->user();
-        $finduser = User::FindOrCreateUser($user, 'google');
-        Auth::login($finduser);
-        return redirect('/');
+        return User::FindOrCreateUserAuth($user, 'google');
+
 
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 use Socialite;
-
+use Auth;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $social_type
      * @return User
      */
-    static function FindOrCreateUser($user, $social_type) {
+    static function FindOrCreateUserAuth($user, $social_type) {
 
 
 
@@ -62,10 +62,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
             $newuser->save();
 
+            Auth::login($newuser);
+
             return $newuser;
         }
+        Auth::login($finduser);
 
-        return $finduser;
+        return redirect('smslist/create');
     }
     static function UserName() {
         $user_id = Auth::retrieveById();
