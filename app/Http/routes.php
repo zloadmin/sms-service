@@ -26,3 +26,14 @@ Route::get('/oauth/google', 'AccountController@google_redirect');
 
 Route::get('/oauth/callback/github', 'AccountController@github');
 Route::get('/oauth/callback/google', 'AccountController@google');
+
+
+
+
+
+
+Route::group(['middleware' => 'auth'], function () {
+
+    //for users
+
+});
