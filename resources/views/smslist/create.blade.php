@@ -33,66 +33,68 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="planing" id="planing"> Запланировать рассылку
+                                    <input type="checkbox" name="planing" id="planing" onchange="$('.planing').toggle();"> Запланировать рассылку
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group planing">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="planing_type" value="1" checked> Отправить в указаное время
-                                </label>
+                    <div class="planing hidden">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="planing_type" value="1"  id="planing_type1" onchange="$('.planing_type1').show(); $('.planing_type2').hide();$('.period').hide();" checked> Отправить в указаное время
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group planing">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="planing_type" value="2" id="period"> Отправить в указаный период
-                                </label>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="planing_type" value="2" id="planing_type2" onchange="$('.planing_type1').hide(); $('.planing_type2').show(); $('.period').show();"> Отправить в указаный период
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group planing_type1 show">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            календарь
-                        </div>
-                    </div>
-                    <div class="form-group planing_type2 hidden">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            календарь1 календарь2
-                        </div>
-                    </div>
-                    <div class="form-group planing period">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="smoothly" value="true" checked> Плавная отправка
-                                </label>
+                        <div class="form-group planing_type1">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                календарь
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group planing period">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="smoothly" value="false"> Указать период
-                                </label>
+                        <div class="form-group planing_type2 hidden">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                календарь1 календарь2
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group planing">
-                        <label class="col-sm-2 control-label" for="number">Период (минут)</label>
-                        <div class="col-sm-10">
-                            <input type="number" name="period" class="form-control">
+                        <div class="form-group period hidden">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="smoothly" value="true" onchange="$('.setperiod').hide();" checked> Плавная отправка
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group period hidden">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="smoothly" value="false" id="smoothlyfalse" onchange="$('.setperiod').toggle();"> Указать период
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group hidden setperiod">
+                            <label class="col-sm-2 control-label" for="number">Период (минут)</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="period" class="form-control">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success">Разослать</button>
+                            <button type="submit" class="btn btn-success btn-lg center-block">Разослать сообщения</button>
                         </div>
                     </div>
                 </form>
