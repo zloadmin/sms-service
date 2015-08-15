@@ -35,6 +35,6 @@ Route::get('/oauth/callback/google', 'AccountController@google');
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/smslist/create', 'SMSListController@create');
-
+    Route::post('/smslist/send', 'SMSListController@send');
 
 });

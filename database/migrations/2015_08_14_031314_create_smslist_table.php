@@ -21,6 +21,7 @@ class CreateSmslistTable extends Migration
             $table->dateTime('date_start');
             $table->dateTime('date_stop');
             $table->integer('period');
+            $table->boolean('smoothly');
         });
     }
 
