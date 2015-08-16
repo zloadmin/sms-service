@@ -21,7 +21,8 @@ class AccountController extends Controller
 
     public function github() {
         $user = Socialite::with('github')->user();
-        return User::FindOrCreateUserAuth($user, 'github');
+        User::FindOrCreateUserAuth($user, 'github');
+        return redirect('/smslist/create');
 
     }
 
@@ -32,9 +33,8 @@ class AccountController extends Controller
 
     public function google() {
         $user = Socialite::with('google')->user();
-        return User::FindOrCreateUserAuth($user, 'google');
-
-
+        User::FindOrCreateUserAuth($user, 'google');
+        return redirect('/smslist/create');
     }
 
 
