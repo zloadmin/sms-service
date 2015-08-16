@@ -75,4 +75,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         dd($user_id);
     }
 
+    public function numbersgroup()
+    {
+        return $this->hasMany('App\NumbersGroup');
+    }
+
 }

@@ -36,5 +36,5 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/smslist/create', 'SMSListController@create');
     Route::post('/smslist/send', 'SMSListController@send');
-
+    Route::get('/number_group/list', 'NumbersGroupController@index');
 });
