@@ -148,6 +148,9 @@ return [
 
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+
+        Propaganistas\LaravelPhone\LaravelPhoneServiceProvider::class,
+
     ],
 
     /*

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use Validator;
 
 class SMSListController extends Controller
 {
@@ -17,10 +18,24 @@ class SMSListController extends Controller
     }
 
 
-    public function send()
+    public function send(Request $request)
     {
 
+        $rules = [
+            'number' => 'required|phone:RU'
+        ];
 
-        return dd($_POST);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            return dd($_POST);
+        }
+
+
     }
 }

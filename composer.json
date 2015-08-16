@@ -9,6 +9,7 @@
         "laravel/framework": "5.1.*",
         "laravel/socialite": "~2.0",
         "fzaninotto/faker": "^1.5",
+        "propaganistas/laravel-phone": "~2.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
