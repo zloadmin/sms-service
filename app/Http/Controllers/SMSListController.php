@@ -19,6 +19,8 @@ class SMSListController extends Controller
 
     public function send()
     {
+
+
         return dd($_POST);
     }
 }
