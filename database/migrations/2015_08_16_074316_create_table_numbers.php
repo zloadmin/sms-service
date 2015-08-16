@@ -16,6 +16,7 @@ class CreateTableNumbers extends Migration
             $table->increments('id');
             $table->integer('numbers_group_id');
             $table->string('number');
+            $table->timestamps();
         });
     }
 
