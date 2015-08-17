@@ -8,5 +8,5 @@ class Numbers extends Model
 {
     protected $table = 'numbers';
 
-    protected $fillable = ['*'];
+    protected $fillable = ['number'];
 }

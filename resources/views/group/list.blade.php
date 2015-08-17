@@ -13,11 +13,12 @@
             @foreach($groups as $group)
                 <tr>
                     <td>{{ $group->id }}</td>
-                    <td>{{ $group->name }}</td>
+                    <td><a href="{!!URL::to('number_group/view/'.$group->id)!!}">{{ $group->name }}</a></td>
                     <td>_</td>
                     <td>_</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    {!! $groups->render() !!}
 @stop
