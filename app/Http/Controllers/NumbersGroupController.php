@@ -12,6 +12,7 @@ use App\Numbers;
 use Auth;
 use Validator;
 use File;
+use Excel;
 
 class NumbersGroupController extends Controller
 {
@@ -122,9 +123,33 @@ class NumbersGroupController extends Controller
             foreach($find->numbers as $number) $content .= $number->number."\n";
 
             $makefile = File::put($pathToFile, $content);
-            if($makefile===false) return redirect()->back()->with(['error' => 'Ошибка создания файла']); //Добавить логирование
+            if($makefile===false) return redirect()->back()->with(['error' => 'Ошибка создания файла']); //[addlog]
             return response()->download($pathToFile, $name, $headers)->deleteFileAfterSend(true);
         }
 
+        if($request->input('format')==="xls") {
+
+            $name = $find->name.".txt";
+            $headers = ['Content-Type' => 'text/plain'];
+            $pathToFile = base_path().'/tmp/'.str_random(10).".txt";
+
+
+
+
+            foreach($find->numbers as $number) $content[] = array($number->number);
+
+
+            Excel::create($find->name, function($excel) use($content) {
+
+
+                $excel->sheet('Телефоны', function($sheet) use($content) {
+
+                    $sheet->fromArray($content, null, 'A1', false, false);
+
+                });
+
+            })->download('xls');
+
+        }
     }
 }
