@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Новая рассылка</h3>
+                <h3 class="panel-title">Новаый список</h3>
             </div>
             <div class="panel-body">
                 @if (count($errors) > 0)

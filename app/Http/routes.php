@@ -41,5 +41,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/number_group/view/{id}', 'NumbersGroupController@view');
     Route::get('/number_group/create', 'NumbersGroupController@create');
     Route::post('/number_group/send', 'NumbersGroupController@send');
-
+    Route::delete('/number_group/delete/{id}', 'NumbersGroupController@delete');
+    Route::post('/number_group/download/{id}', 'NumbersGroupController@download');
 });
+
+
+Route::any('foo', function () {
+    return 'Hello World';
+});
+
