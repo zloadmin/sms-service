@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+    //форма расылки
     if($("#planing").prop("checked")) { $('.planing').show(); }
     if($("#smoothlyfalse").prop("checked")) { $('.setperiod').show(); }
     if($("#planing_type1").prop("checked")) { $('.planing_type1').show(); $('.planing_type2').hide(); }
@@ -6,6 +8,7 @@ $(document).ready(function(){
 
 
     var now = new Date();
+
     $('#date_timepicker_send').datetimepicker({
         format:'Y-m-d H:i:s',
         onShow:function( ct ){
@@ -15,23 +18,41 @@ $(document).ready(function(){
         },
         lang:$('html').attr('lang') ? $('html').attr('lang') : 'en'
     });
+
     $('#date_timepicker_start').datetimepicker({
-            format:'Y-m-d H:i:s',
-            onShow:function( ct ){
-                this.setOptions({
-                    minDate: now
-                })
-            },
-            lang:$('html').attr('lang') ? $('html').attr('lang') : 'en'
-        });
+        format:'Y-m-d H:i:s',
+        onShow:function( ct ){
+            this.setOptions({
+                minDate: now
+            })
+        },
+        lang:$('html').attr('lang') ? $('html').attr('lang') : 'en'
+    });
+
     $('#date_timepicker_end').datetimepicker({
-            format:'Y-m-d H:i:s',
-            onShow:function( ct ){
-                this.setOptions({
-                    minDate:$('#date_timepicker_start').val()?$('#date_timepicker_start').val():false
-                })
-            },
-            lang:$('html').attr('lang') ? $('html').attr('lang') : 'en'
+        format:'Y-m-d H:i:s',
+        onShow:function( ct ){
+            this.setOptions({
+                minDate:$('#date_timepicker_start').val()?$('#date_timepicker_start').val():false
+            })
+        },
+        lang:$('html').attr('lang') ? $('html').attr('lang') : 'en'
+    });
+
+
+    //Добавление и удаление списков рассылки
+    $('.addgroup').submit(function(e){
+        e.preventDefault();
+        var btn = $(this).children('button');
+        btn.button('loading');
+
+        $.get($(this).attr('action')).success(function(data) {
+            console.log(data);
+
         });
+
+
+
+    });
 
 });

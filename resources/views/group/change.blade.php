@@ -27,8 +27,8 @@
                         <td><a href="{!! URL::to('number_group/view/'.$user_group->id) !!}">{{ $user_group->name }}</a></td>
                         <td>{{ $user_group->numbers()->count() }}</td>
                         <td>
-                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$user_group->id, 'method' => 'post')) !!}
-                            {!! Form::submit('Добавить', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$user_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
+                            {!! Form::button('Добавить', ['class' => 'btn btn-primary', 'type' => 'submit', 'data-loading-text' => 'Загрузка...']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>
@@ -53,8 +53,8 @@
                         <td><a href="{!!URL::to('number_group/system_view/'.$system_group->id)!!}">{{ $system_group->name }}</a></td>
                         <td>{{ $system_group->numbers()->count() }}</td>
                         <td>
-                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$system_group->id, 'method' => 'post')) !!}
-                            {!! Form::submit('Добавить', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$system_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
+                            {!! Form::button('Добавить', ['class' => 'btn btn-primary', 'type' => 'submit', 'data-loading-text' => 'Загрузка...']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>

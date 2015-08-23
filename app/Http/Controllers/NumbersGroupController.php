@@ -179,4 +179,25 @@ class NumbersGroupController extends Controller
 
         return View::make('group.change', compact('user_groups', 'system_groups'));
     }
+    public function ajax_add_group($id, Request $request)
+    {
+        $data = array();
+
+        $group = NumbersGroup::find($id);
+
+
+        if(!$group) {
+            $data['status'] = 'false';
+            $data['message'] = 'Ошибка добавления. Данный список не найден'; //[addlog]
+        } elseif(($group->user_id === 0 AND $group->user_id !== Auth::id()) === false AND ($group->user_id !== 0 AND $group->user_id === Auth::id()) === false) {
+            $data['status'] = 'false';
+            $data['message'] = 'Ошибка добавления. Ошибка доступа'; //[addlog]
+        } else {
+            $data['status'] = 'true';
+            $data['message'] = 'Список 	&laquo;'.$group->name.'&raquo; добавлен'; //[addlog]
+        }
+
+        return response()->json($data);
+
+    }
 }

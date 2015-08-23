@@ -46,6 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/number_group/delete/{id}', 'NumbersGroupController@delete');
     Route::post('/number_group/download/{id}', 'NumbersGroupController@download');
     Route::get('/number_group/change', 'NumbersGroupController@change');
+
+    Route::get('/number_group/ajax/add_group/{id}', 'NumbersGroupController@ajax_add_group');
+
 });
 
 
