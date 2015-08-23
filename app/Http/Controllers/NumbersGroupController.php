@@ -18,10 +18,17 @@ class NumbersGroupController extends Controller
 {
     public function index()
     {
-        $groups =  Auth::user()->numbersgroup()->paginate(20); //add pagination
+        $groups =  Auth::user()->numbersgroup()->paginate(20);
 
 
         return View::make('group.list', compact('groups'));
+    }
+
+    public function systemindex()
+    {
+        $groups = NumbersGroup::where('user_id', '=', '0')->paginate(20);
+
+        return View::make('group.system_list', compact('groups'));
     }
 
     public function view($id)
@@ -31,6 +38,17 @@ class NumbersGroupController extends Controller
         $numbers = Auth::user()->numbersgroup()->find($id)->numbers()->paginate(20);
 
         return View::make('group.view', compact('numbers', 'name'));
+    }
+
+    public function system_view($id)
+    {
+
+        $name = NumbersGroup::where('user_id', '=', '0')->find($id)->name;
+
+        $numbers = NumbersGroup::where('user_id', '=', '0')->find($id)->numbers()->paginate(20);
+
+
+        return View::make('group.system_view', compact('numbers', 'name'));
     }
 
     public function create()
@@ -151,5 +169,14 @@ class NumbersGroupController extends Controller
             })->download('xls');
 
         }
+    }
+
+    public function change()
+    {
+        $user_groups =  Auth::user()->numbersgroup()->get();
+
+        $system_groups = NumbersGroup::where('user_id', '=', '0')->get();
+
+        return View::make('group.change', compact('user_groups', 'system_groups'));
     }
 }

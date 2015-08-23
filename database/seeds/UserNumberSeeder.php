@@ -30,10 +30,17 @@ class UserNumberSeeder extends Seeder
             }
 
         }
+        //system NumbersGroup
+        for($i=0;$i<=rand(1,10);$i++) {
+            NumbersGroup::create([
+                'user_id' => 0,
+                'name' => $faker->sentence($nbWords = rand(1, 10))
+            ]);
+        }
 
         foreach(NumbersGroup::all() as $number_grop) {
 
-            for($i=0;$i<=rand(0,999);$i++) {
+            for($i=0;$i<=rand(1,99);$i++) {
 
                 Numbers::create([
                     'numbers_group_id' => $number_grop->id,

@@ -22,6 +22,7 @@
                         <div class="col-sm-4">
                             <input placeholder="+79512345678" type="text" name="number" id="number" value="{{ old('number') }}" class="form-control col-sm-6">
                         </div>
+                        <a class="col-sm-2 btn btn-primary" href="/number_group/change">Выбрать из списка</a>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="message">Сообщение</label>
