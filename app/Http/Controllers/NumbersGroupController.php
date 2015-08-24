@@ -13,6 +13,7 @@ use Auth;
 use Validator;
 use File;
 use Excel;
+use Session;
 
 class NumbersGroupController extends Controller
 {
@@ -123,6 +124,7 @@ class NumbersGroupController extends Controller
         if(!$find) return redirect()->back()->with(['error' => 'Ошибка удаления']);
         $message = "Список телефонов &laquo;".$find->name."&raquo; успешно удален!";
         $find->delete();
+        Session::forget('list.'.$id);
         return redirect()->back()->with(['success' => $message]);
     }
 
@@ -179,25 +181,55 @@ class NumbersGroupController extends Controller
 
         return View::make('group.change', compact('user_groups', 'system_groups'));
     }
-    public function ajax_add_group($id, Request $request)
+    public function ajax_add_or_remove_group($id, Request $request)
     {
+
         $data = array();
 
-        $group = NumbersGroup::find($id);
+        if($request->input('type')=='add') {
+
+            $group = NumbersGroup::find($id);
+
+            if(!$group) {
+                $data['status'] = 'false';
+                $data['message'] = 'Ошибка добавления. Данный список не найден'; //[addlog]
+            } elseif(($group->user_id === 0 AND $group->user_id !== Auth::id()) === false AND ($group->user_id !== 0 AND $group->user_id === Auth::id()) === false) {
+                $data['status'] = 'false';
+                $data['message'] = 'Ошибка добавления. Ошибка доступа'; //[addlog]
+            } else {
+                $data['status'] = 'true';
+                $data['message'] = 'Список 	&laquo;'.$group->name.'&raquo; добавлен'; //[addlog]
+                $data['doing'] = 'added';
+                Session::put('list.'.$id, 'true');
+            }
 
 
-        if(!$group) {
-            $data['status'] = 'false';
-            $data['message'] = 'Ошибка добавления. Данный список не найден'; //[addlog]
-        } elseif(($group->user_id === 0 AND $group->user_id !== Auth::id()) === false AND ($group->user_id !== 0 AND $group->user_id === Auth::id()) === false) {
-            $data['status'] = 'false';
-            $data['message'] = 'Ошибка добавления. Ошибка доступа'; //[addlog]
-        } else {
-            $data['status'] = 'true';
-            $data['message'] = 'Список 	&laquo;'.$group->name.'&raquo; добавлен'; //[addlog]
+        } elseif($request->input('type')=='delete') {
+
+            if (Session::has('list.'.$id)) {
+
+                $group = NumbersGroup::find($id);
+
+                Session::forget('list.'.$id);
+                $data['status'] = 'true';
+                $data['message'] = 'Список 	&laquo;'.$group->name.'&raquo; удален';
+                $data['doing'] = 'deleted';
+
+            } else {
+                $data['status'] = 'false';
+                $data['message'] = 'Ошибка удаления. Данный список небыл добавлен ранее.'; //[addlog]
+            }
+
+
         }
 
         return response()->json($data);
 
+    }
+
+    public function sessiontest()
+    {
+
+        dd(Session::get('list'));
     }
 }

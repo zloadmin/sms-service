@@ -46,9 +46,35 @@ $(document).ready(function(){
         var btn = $(this).children('button');
         btn.button('loading');
 
-        $.get($(this).attr('action')).success(function(data) {
-            console.log(data);
+        $.get($(this).attr('action'), {type: btn.val()}).success(function(data) {
 
+            if(data.status=="true") {
+                if(data.doing=="added") {
+                    btn.button('reset');
+                    btn.removeClass('btn-primary');
+                    btn.button('delete');
+                    btn.addClass('btn-danger');
+                    btn.val('delete');
+                }
+                if(data.doing=="deleted") {
+                    btn.button('reset');
+                    btn.removeClass('btn-danger');
+                    btn.button('add');
+                    btn.addClass('btn-primary');
+                    btn.val('add');
+                }
+                //added alert
+            }
+
+            if(data.status=="false") {
+                btn.button('reset');
+                $(".main").prepend('' +
+                    '<div class="alert alert-danger fade in">' +
+                        '<p>'+data.message+'</p>' +
+                    '</div>' +
+                    '');
+
+            }
         });
 
 

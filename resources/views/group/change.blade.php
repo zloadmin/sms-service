@@ -27,8 +27,30 @@
                         <td><a href="{!! URL::to('number_group/view/'.$user_group->id) !!}">{{ $user_group->name }}</a></td>
                         <td>{{ $user_group->numbers()->count() }}</td>
                         <td>
-                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$user_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
-                            {!! Form::button('Добавить', ['class' => 'btn btn-primary', 'type' => 'submit', 'data-loading-text' => 'Загрузка...']) !!}
+                            {!! Form::open(array('url' => '/number_group/ajax/add_or_remove_group/'.$user_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
+                            @if(Session::has('list.'.$user_group->id))
+                                {!! Form::button('Удалить', [
+                                'class' => 'btn btn-danger',
+                                'type' => 'submit',
+                                'data-loading-text' => 'Загрузка...',
+                                'value' => 'delete',
+                                'name' => 'type',
+                                'autocomplete' => 'off',
+                                'data-delete-text' => 'Удалить',
+                                'data-add-text' => 'Добавить'
+                                ]) !!}
+                            @else
+                                {!! Form::button('Добавить', [
+                                'class' => 'btn btn-primary',
+                                'type' => 'submit',
+                                'data-loading-text' => 'Загрузка...',
+                                'value' => 'add',
+                                'name' => 'type',
+                                'autocomplete' => 'off',
+                                'data-delete-text' => 'Удалить',
+                                'data-add-text' => 'Добавить'
+                                ]) !!}
+                            @endif
                             {!! Form::close() !!}
                         </td>
                     </tr>
@@ -48,13 +70,36 @@
                 </thead>
                 <tbody>
                 @foreach($system_groups as $system_group)
+
                     <tr>
                         <td>{{ $system_group->id }}</td>
                         <td><a href="{!!URL::to('number_group/system_view/'.$system_group->id)!!}">{{ $system_group->name }}</a></td>
                         <td>{{ $system_group->numbers()->count() }}</td>
                         <td>
-                            {!! Form::open(array('url' => '/number_group/ajax/add_group/'.$system_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
-                            {!! Form::button('Добавить', ['class' => 'btn btn-primary', 'type' => 'submit', 'data-loading-text' => 'Загрузка...']) !!}
+                            {!! Form::open(array('url' => '/number_group/ajax/add_or_remove_group/'.$system_group->id, 'method' => 'get', 'class' => 'addgroup')) !!}
+                            @if(Session::has('list.'.$system_group->id))
+                                {!! Form::button('Удалить', [
+                                'class' => 'btn btn-danger',
+                                'type' => 'submit',
+                                'data-loading-text' => 'Загрузка...',
+                                'value' => 'delete',
+                                'name' => 'type',
+                                'autocomplete' => 'off',
+                                'data-delete-text' => 'Удалить',
+                                'data-add-text' => 'Добавить'
+                                ]) !!}
+                            @else
+                                {!! Form::button('Добавить', [
+                                'class' => 'btn btn-primary',
+                                'type' => 'submit',
+                                'data-loading-text' => 'Загрузка...',
+                                'value' => 'add',
+                                'name' => 'type',
+                                'autocomplete' => 'off',
+                                'data-delete-text' => 'Удалить',
+                                'data-add-text' => 'Добавить'
+                                ]) !!}
+                            @endif
                             {!! Form::close() !!}
                         </td>
                     </tr>
