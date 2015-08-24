@@ -48,9 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/number_group/change', 'NumbersGroupController@change');
 
     Route::get('/number_group/ajax/add_or_remove_group/{id}', 'NumbersGroupController@ajax_add_or_remove_group');
+    Route::get('/number_group/ajax/remove_all_group', 'NumbersGroupController@ajax_remove_all_group');
 
-
-    Route::get('/number_group/sessiontest', 'NumbersGroupController@sessiontest');
+//    Route::get('/number_group/sessiontest', 'NumbersGroupController@sessiontest');
 
 });
 

@@ -227,9 +227,15 @@ class NumbersGroupController extends Controller
 
     }
 
-    public function sessiontest()
-    {
+    public function ajax_remove_all_group() {
 
-        dd(Session::get('list'));
+        Session::forget('list');
+        return redirect()->back()->withInput();
+
     }
+//    public function sessiontest()
+//    {
+//
+//        dd(Session::get('list'));
+//    }
 }
