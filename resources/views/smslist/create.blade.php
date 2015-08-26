@@ -27,7 +27,7 @@
                                 <a class="btn btn-primary" href="/number_group/change">Выбрано списков: {{$count}}</a>
                             </div>
                             <div class="col-sm-2">
-                                <a class="btn btn-danger" href="/number_group/ajax/remove_all_group">Отчистить</a>
+                                <a class="btn btn-danger" href="/number_group/remove_all_group">Отчистить</a>
                             </div>
                         @else
                         <a class="col-sm-2 btn btn-primary" href="/number_group/change">Выбрать из списка</a>
@@ -41,68 +41,48 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="planing" id="planing" onchange="$('.planing').toggle();"> Запланировать рассылку
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="planing hidden">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="radio">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="planing_type" value="1"  id="planing_type1" onchange="$('.planing_type1').show(); $('.planing_type2').hide();$('.period').hide();" checked> Отправить в указаное время
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="planing_type" value="2" id="planing_type2" onchange="$('.planing_type1').hide(); $('.planing_type2').show(); $('.period').show();"> Отправить в указаный период
-                                    </label>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Дополнительные параметры рассылки</a>
+                                    </h4>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-
-                            </div>
-                        </div>
-                        <div class="form-group planing_type1">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        Отправить в <input name="date_send" id="date_timepicker_send" type="text" value="" class="form-control" />
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        Начать рассылку в <input name="date_start" id="date_timepicker_start" type="text" value="" class="form-control" />
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        Закончить рассылку в <input name="date_stop" id="date_timepicker_end" type="text" value="" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group period">
+                                            <div class="col-sm-6">
+                                                <div class="radio">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="smoothly" value="true" onchange="$('.setperiod').addClass('invisible');" checked> Плавная отправка
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="smoothly" value="false" id="smoothlyfalse" onchange="$('.setperiod').removeClass('invisible');"> Указать период
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group invisible setperiod">
+                                                    <label class="col-sm-4 control-label" for="number" style="text-align: left">Период (минут)</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="number" name="period" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group planing_type2 hidden">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        Начать рассылку <input name="date_start" id="date_timepicker_start" type="text" value="" class="form-control" />
-                                    </div>
-                                    <div class="col-sm-6">
-                                        Закончить рассылку <input name="date_stop" id="date_timepicker_end" type="text" value="" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group period hidden">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <div class="radio">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="smoothly" value="true" onchange="$('.setperiod').hide();" checked> Плавная отправка
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="smoothly" value="false" id="smoothlyfalse" onchange="$('.setperiod').toggle();"> Указать период
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group hidden setperiod">
-                            <label class="col-sm-2 control-label" for="number">Период (минут)</label>
-                            <div class="col-sm-10">
-                                <input type="number" name="period" class="form-control">
                             </div>
                         </div>
                     </div>

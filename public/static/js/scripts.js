@@ -1,10 +1,10 @@
 $(document).ready(function(){
 
-    //форма расылки
-    if($("#planing").prop("checked")) { $('.planing').show(); }
-    if($("#smoothlyfalse").prop("checked")) { $('.setperiod').show(); }
-    if($("#planing_type1").prop("checked")) { $('.planing_type1').show(); $('.planing_type2').hide(); }
-    if($("#planing_type2").prop("checked")) { $('.planing_type2').show(); $('.planing_type1').hide(); $('.period').show();}
+    ////форма расылки
+    //if($("#planing").prop("checked")) { $('.planing').show(); }
+    if($("#smoothlyfalse").prop("checked")) { $('.setperiod').removeClass('invisible'); }
+    //if($("#planing_type1").prop("checked")) { $('.planing_type1').show(); $('.planing_type2').hide(); }
+    //if($("#planing_type2").prop("checked")) { $('.planing_type2').show(); $('.planing_type1').hide(); $('.period').show();}
 
 
     var now = new Date();

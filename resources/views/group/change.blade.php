@@ -1,6 +1,6 @@
 @extends('master')
 @section('main')
-    <a href="/smslist/create" class="btn btn-primary" style="margin-bottom: 20px;"><i class="glyphicon glyphicon-backward"></i> Вернуться</a>
+    <a href="/smslist/create" class="btn btn-primary" style="margin-bottom: 20px;"><i class="glyphicon glyphicon-backward"></i> Вернуться к списку рассылки</a>
     
     <ul class="nav nav-tabs">
         <li class="active"><a href="#user_groups" data-toggle="tab">Мои списки</a></li>
