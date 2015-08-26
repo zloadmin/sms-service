@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -24,19 +25,54 @@ class SMSListController extends Controller
     {
 
         $rules = [
-            'number' => 'required|phone:RU'
+            'message' => 'required|max:1500'
         ];
 
-        $validator = Validator::make($request->all(), $rules);
+        $messages = [
+            'message.required' => 'Поле сообщение обязательно для заполнения',
+            'message.max' => 'Размер сообщения не более 1500 символов',
+            'number.required' => 'Впишите номер для отправки или выберете из базы',
+            'number.phone' =>  'Неверный формат номера',
+        ];
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            return dd($_POST);
+        //validation
+        if(count(Session::get('list'))===0 AND $request->input('number')==="") {
+
+            $rules = array_add($rules, 'number', 'required');
+
+        } elseif(count(Session::get('list'))===0 AND $request->input('number')!=="") {
+
+            $rules = array_add($rules, 'number', 'phone:RU');
+
         }
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator)->withInput();
+
+        //valid fields
+        if($request->input('date_start')!=="") {
+
+            $date_start = Carbon::parse($request->input('date_start'));
+            if($date_start->timestamp > Carbon::now()->timestamp) {
+                $start = $date_start->toDateTimeString();
+            } else {
+                $start = Carbon::now()->toDateTimeString();
+            }
+
+        } else {
+            $start = Carbon::now()->toDateTimeString();
+        }
+
+        if($request->input('date_stop')!=="") {
+            $date_stop = Carbon::parse($request->input('date_stop'));
+            $date_start = Carbon::parse($start);
+            if($date_stop->timestamp > $date_start->timestamp) {
+                $stop = $date_stop->toDateTimeString();
+            }
+        }
+
 
 
     }

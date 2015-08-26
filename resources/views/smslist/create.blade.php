@@ -15,12 +15,11 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="/smslist/send" class="form-horizontal" role="form">
-                    {!! csrf_field() !!}
+                {!! Form::open(['action' => 'SMSListController@send', 'class' => 'form-horizontal', 'role' => 'form']) !!}
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="number">Номер</label>
                         <div class="col-sm-4">
-                            <input placeholder="+79512345678" type="text" name="number" id="number" value="{{ old('number') }}" class="form-control col-sm-6">
+                            {!! Form::text('number', '', ['placeholder' => '+79512345678', 'id' => 'number', 'class' => 'form-control col-sm-6']) !!}
                         </div>
                         @if($count>=1)
                             <div class="col-sm-2">
@@ -36,7 +35,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="message">Сообщение</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Привет!" name="message" id="message" class="form-control">{{ old('message') }}</textarea>
+                            {!! Form::textarea('message', '', ['id' => 'message', 'class' => 'form-control', 'placeholder' => 'Привет!', 'maxlength' => '1500', 'rows' => '', 'cols' => '']) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -53,10 +52,11 @@
                                             <div class="col-sm-12">
                                                 <div class="row">
                                                     <div class="col-sm-6">
-                                                        Начать рассылку в <input name="date_start" id="date_timepicker_start" type="text" value="" class="form-control" />
+                                                        Начать рассылку в {!! Form::text('date_start', '', ['id' => 'date_timepicker_start', 'class' => 'form-control']) !!}
+
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        Закончить рассылку в <input name="date_stop" id="date_timepicker_end" type="text" value="" class="form-control" />
+                                                        Закончить рассылку в {!! Form::text('date_stop', '', ['id' => 'date_timepicker_end', 'class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,10 +65,10 @@
                                             <div class="col-sm-6">
                                                 <div class="radio">
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="smoothly" value="true" onchange="$('.setperiod').addClass('invisible');" checked> Плавная отправка
+                                                        {!! Form::radio('smoothly', '1', true, ['id' => 'smoothly_1']) !!} Плавная отправка
                                                     </label>
                                                     <label class="radio-inline">
-                                                        <input type="radio" name="smoothly" value="false" id="smoothlyfalse" onchange="$('.setperiod').removeClass('invisible');"> Указать период
+                                                        {!! Form::radio('smoothly', '2', false, ['id' => 'smoothly_2']) !!} Указать период
                                                     </label>
                                                 </div>
                                             </div>
@@ -76,7 +76,7 @@
                                                 <div class="form-group invisible setperiod">
                                                     <label class="col-sm-4 control-label" for="number" style="text-align: left">Период (минут)</label>
                                                     <div class="col-sm-8">
-                                                        <input type="number" name="period" class="form-control">
+                                                        {!! Form::number('period', '', ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -88,10 +88,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success btn-lg center-block">Разослать сообщения</button>
+                            <button type="submit" class="btn btn-success btn-lg center-block">Далее</button>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
