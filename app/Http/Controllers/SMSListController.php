@@ -76,28 +76,19 @@ class SMSListController extends Controller
         }
         $count = 100;
         $data_array = array();
+        $interval = intval($request->input('period'));
 
-        if($start AND !isset($stop)) {
-
-            if($request->input('smoothly')==1) {
-                for($i = 0; $i>=$count;$i++) $data_array[] = $start->toDateTimeString
-            } elseif($request->input('smoothly')==2) {
-                //function
+        if($request->input('smoothly')==2 AND $interval >= 1) {
+            $data_array[] = CarbonAfternoon::getDatesInterval($start, $interval, $count);
+        } else {
+            if($start AND !isset($stop)) {
+                for($i = 1; $i<=$count;$i++) $data_array[] = $start->toDateTimeString();
+            } elseif ($start AND isset($stop)) {
+                $data_array[] = CarbonAfternoon::getDatesIntervalWithStop($start, $stop, $count);
             }
-
-        } elseif ($start AND isset($stop)) {
-
-            if($request->input('smoothly')==1) {
-                //function
-            } elseif($request->input('smoothly')==2) {
-                //function
-            }
-
         }
 
-        var_dump($start->toDateTimeString() );
-        if(isset($stop)) var_dump($stop->toDateTimeString());
-        dd($data_array);
+        var_dump($data_array);
 
     }
 }
