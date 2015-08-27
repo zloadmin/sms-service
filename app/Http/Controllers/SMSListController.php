@@ -10,12 +10,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Validator;
+use App\Components\CarbonAfternoon;
 
 class SMSListController extends Controller
 {
 
     public function create()
     {
+
         $count = count(Session::get('list'));
         return View('smslist.create')->with(['count' => $count]);
     }
@@ -54,26 +56,48 @@ class SMSListController extends Controller
         //valid fields
         if($request->input('date_start')!=="") {
 
-            $date_start = Carbon::parse($request->input('date_start'));
-            if($date_start->timestamp > Carbon::now()->timestamp) {
-                $start = $date_start->toDateTimeString();
+            $date_start = CarbonAfternoon::parse($request->input('date_start'));
+            if($date_start->timestamp >= CarbonAfternoon::now()->timestamp) {
+                $start = $date_start->startOfAfternoon();
             } else {
-                $start = Carbon::now()->toDateTimeString();
+                $start = CarbonAfternoon::now()->startOfAfternoon();
             }
 
         } else {
-            $start = Carbon::now()->toDateTimeString();
+            $start = CarbonAfternoon::now()->startOfAfternoon();
         }
 
         if($request->input('date_stop')!=="") {
-            $date_stop = Carbon::parse($request->input('date_stop'));
-            $date_start = Carbon::parse($start);
-            if($date_stop->timestamp > $date_start->timestamp) {
-                $stop = $date_stop->toDateTimeString();
+            $date_stop = CarbonAfternoon::parse($request->input('date_stop'))->startOfAfternoon();
+
+            if($date_stop->timestamp > $start->timestamp) {
+                $stop = $date_stop;
             }
         }
+        $count = 100;
+        $data_array = array();
 
+        if($start AND !isset($stop)) {
 
+            if($request->input('smoothly')==1) {
+                for($i = 0; $i>=$count;$i++) $data_array[] = $start->toDateTimeString
+            } elseif($request->input('smoothly')==2) {
+                //function
+            }
+
+        } elseif ($start AND isset($stop)) {
+
+            if($request->input('smoothly')==1) {
+                //function
+            } elseif($request->input('smoothly')==2) {
+                //function
+            }
+
+        }
+
+        var_dump($start->toDateTimeString() );
+        if(isset($stop)) var_dump($stop->toDateTimeString());
+        dd($data_array);
 
     }
 }
