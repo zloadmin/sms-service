@@ -10,5 +10,8 @@ class SMSList extends Model
 
     protected $fillable = ['*'];
 
-
+    public function messages()
+    {
+        return $this->hasMany('App\Messages');
+    }
 }

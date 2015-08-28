@@ -25,16 +25,16 @@ class CarbonAfternoon extends Carbon {
 
             if($i===1) {
 
-                $data_array[$i] = $start->toDateTimeString();
+                $data_array[] = $start->toDateTimeString();
 
             } else {
 
                 $lastDate = end($data_array);
 
                 if(static::parse($lastDate)->hour>=self::BNOON) {
-                    $data_array[$i] = static::parse($lastDate)->addMinutes($interval)->addHours(self::ALLNIGHT)->toDateTimeString();
+                    $data_array[] = static::parse($lastDate)->addMinutes($interval)->addHours(self::ALLNIGHT)->toDateTimeString();
                 } else {
-                    $data_array[$i] = static::parse($lastDate)->addMinutes($interval)->toDateTimeString();
+                    $data_array[] = static::parse($lastDate)->addMinutes($interval)->toDateTimeString();
                 }
 
             }
@@ -52,7 +52,13 @@ class CarbonAfternoon extends Carbon {
         $AllDates = static::getDatesWithPeriods($step, $intervals);
 
         if(count($AllDates)>$count) {
-
+           array_splice($AllDates, $count);
+        } else {
+            $neeeAdd = $count - count($AllDates);
+            $lastDate = end($AllDates);
+            for($i=1;$i<=$neeeAdd;$i++) {
+                $AllDates[] = $lastDate;
+            }
         }
         return $AllDates;
     }

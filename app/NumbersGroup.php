@@ -16,4 +16,5 @@ class NumbersGroup extends Model
         return $this->hasMany('App\Numbers');
     }
 
+
 }

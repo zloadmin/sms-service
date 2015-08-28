@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSmslistTable extends Migration
+class CreateMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,13 @@ class CreateSmslistTable extends Migration
      */
     public function up()
     {
-        Schema::create('smslist', function (Blueprint $table) {
+
+        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->text('message');
-            $table->tinyInteger('smoothly');
-            $table->dateTime('start');
-            $table->dateTime('stop');
-            $table->integer('period');
+            $table->integer('smslist');
+            $table->tinyInteger('type');
+            $table->dateTime('need_send');
+            $table->string('number', 15);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateSmslistTable extends Migration
      */
     public function down()
     {
-        Schema::drop('smslist');
+        Schema::drop('messages');
     }
 }

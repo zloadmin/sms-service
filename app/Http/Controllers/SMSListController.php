@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\NumbersGroup;
+use App\SMSList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -11,6 +13,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Validator;
 use App\Components\CarbonAfternoon;
+use Auth;
+use App\Messages;
 
 class SMSListController extends Controller
 {
@@ -53,8 +57,26 @@ class SMSListController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withErrors($validator)->withInput();
 
-        //need get count
-        $count = 100;
+        $AllNumbers= array();
+
+        if(count(Session::get('list')) != 0) {
+            foreach(Session::get('list') as $i => $v){
+                $group = NumbersGroup::find($i);
+                $numbers = $group->numbers()->get();
+                foreach($numbers as $v) {
+                    if($group->user_id==0)  {
+                        $AllNumbers[] = ['type' => '1', 'number' => $v->number];
+                    }
+                    if($group->user_id==Auth::id()) {
+                        $AllNumbers[] = ['type' => '2', 'number' => $v->number];
+                    }
+                }
+            }
+        }
+
+        if($request->input('number')) $AllNumbers[] = ['type' => '3', 'number' => $request->input('number')];
+
+        $count = count($AllNumbers);
 
         //valid fields
         if($request->input('date_start')!=="") {
@@ -82,20 +104,49 @@ class SMSListController extends Controller
             }
         }
 
-        $data_array = array();
+        $date_array = array();
+
         $interval = intval($request->input('period'));
 
         if($request->input('smoothly')==2 AND $interval >= 1) {
-            $data_array[] = CarbonAfternoon::getDatesInterval($start, $interval, $count);
+            $date_array[] = CarbonAfternoon::getDatesInterval($start, $interval, $count);
         } else {
             if($start AND !isset($stop)) {
-                for($i = 1; $i<=$count;$i++) $data_array[] = $start->toDateTimeString();
+                for($i = 1; $i<=$count;$i++) $date_array[] = $start->toDateTimeString();
             } elseif ($start AND isset($stop)) {
-                $data_array[] = CarbonAfternoon::getDatesIntervalWithStop($start, $stop, $count);
+                $date_array[] = CarbonAfternoon::getDatesIntervalWithStop($start, $stop, $count);
             }
         }
 
-        dd($data_array);
+        $AllNumbersWitDate = array();
+        $date_array = array_dot($date_array);
+
+        foreach($AllNumbers as $i => $v) {
+            $AllNumbersWitDate[$i] = $v;
+            $AllNumbersWitDate[$i] = array_add($AllNumbersWitDate[$i], 'date', $date_array[$i]);
+
+        }
+
+        if(!isset($stop)) $stop = '';
+
+        $add_smslist = SMSList::create([
+            'user_id' => Auth::id(),
+            'message' => $request->input('message'),
+            'smoothly' => $request->input('smoothly'),
+            'start' => $start,
+            'stop' => $stop,
+            'period' => $interval
+        ]);
+
+        foreach($AllNumbersWitDate as $v) {
+            Messages::create([
+                'smslist' => $add_smslist->id,
+                'type' => $v['type'],
+                'need_send' => $v['date'],
+                'number' => $v['number']
+            ]);
+        }
+        dd($add_smslist);
 
     }
 }
