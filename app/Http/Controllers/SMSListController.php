@@ -53,6 +53,9 @@ class SMSListController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withErrors($validator)->withInput();
 
+        //need get count
+        $count = 100;
+
         //valid fields
         if($request->input('date_start')!=="") {
 
@@ -71,10 +74,14 @@ class SMSListController extends Controller
             $date_stop = CarbonAfternoon::parse($request->input('date_stop'))->startOfAfternoon();
 
             if($date_stop->timestamp > $start->timestamp) {
-                $stop = $date_stop;
+                $period = $date_stop->timestamp - $start->timestamp;
+                if($period >= ($count*2)) {
+                    $stop = $date_stop;
+                }
+
             }
         }
-        $count = 100;
+
         $data_array = array();
         $interval = intval($request->input('period'));
 
@@ -88,7 +95,7 @@ class SMSListController extends Controller
             }
         }
 
-        var_dump($data_array);
+        dd($data_array);
 
     }
 }
