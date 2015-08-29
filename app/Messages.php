@@ -8,5 +8,5 @@ class Messages extends Model
 {
     protected $table = 'messages';
 
-    protected $fillable = ['*'];
+    protected $fillable = ['smslist', 'type', 'need_send', 'number', 'status'];
 }

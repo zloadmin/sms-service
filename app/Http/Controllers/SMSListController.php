@@ -109,17 +109,18 @@ class SMSListController extends Controller
         $interval = intval($request->input('period'));
 
         if($request->input('smoothly')==2 AND $interval >= 1) {
-            $date_array[] = CarbonAfternoon::getDatesInterval($start, $interval, $count);
+            $date_array = CarbonAfternoon::getDatesInterval($start, $interval, $count);
         } else {
             if($start AND !isset($stop)) {
                 for($i = 1; $i<=$count;$i++) $date_array[] = $start->toDateTimeString();
             } elseif ($start AND isset($stop)) {
-                $date_array[] = CarbonAfternoon::getDatesIntervalWithStop($start, $stop, $count);
+                $date_array = CarbonAfternoon::getDatesIntervalWithStop($start, $stop, $count);
+
             }
         }
 
         $AllNumbersWitDate = array();
-        $date_array = array_dot($date_array);
+//        $date_array = array_dot($date_array);
 
         foreach($AllNumbers as $i => $v) {
             $AllNumbersWitDate[$i] = $v;
@@ -135,7 +136,8 @@ class SMSListController extends Controller
             'smoothly' => $request->input('smoothly'),
             'start' => $start,
             'stop' => $stop,
-            'period' => $interval
+            'period' => $interval,
+            'draft' => true
         ]);
 
         foreach($AllNumbersWitDate as $v) {
@@ -143,10 +145,21 @@ class SMSListController extends Controller
                 'smslist' => $add_smslist->id,
                 'type' => $v['type'],
                 'need_send' => $v['date'],
-                'number' => $v['number']
+                'number' => $v['number'],
+                'status' => 1
             ]);
         }
-        dd($add_smslist);
 
+        Session::forget('list');
+
+        return redirect('/smslist/view/'.$add_smslist->id);
+
+    }
+
+    public function view($id)
+    {
+        $smslist = Auth::user()->smslist()->find($id);
+        $messages = $smslist->messages()->orderBy('need_send', 'asc')->paginate(5);
+        return View('smslist.view', compact('smslist', 'messages'));
     }
 }

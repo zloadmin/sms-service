@@ -19,6 +19,7 @@ class CreateMessagesTable extends Migration
             $table->tinyInteger('type');
             $table->dateTime('need_send');
             $table->string('number', 15);
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

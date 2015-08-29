@@ -79,5 +79,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->hasMany('App\NumbersGroup');
     }
-
+    public function smslist()
+    {
+        return $this->hasMany('App\SMSList');
+    }
 }

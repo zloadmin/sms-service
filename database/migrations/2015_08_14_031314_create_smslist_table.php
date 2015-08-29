@@ -20,6 +20,7 @@ class CreateSmslistTable extends Migration
             $table->dateTime('start');
             $table->dateTime('stop');
             $table->integer('period');
+            $table->boolean('draft')->default(true);
             $table->timestamps();
         });
     }

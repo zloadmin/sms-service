@@ -8,10 +8,10 @@ class SMSList extends Model
 {
     protected $table = 'smslist';
 
-    protected $fillable = ['*'];
+    protected $fillable = ['user_id', 'message', 'smoothly', 'start', 'stop', 'period', 'draft'];
 
     public function messages()
     {
-        return $this->hasMany('App\Messages');
+        return $this->hasMany('App\Messages', 'smslist');
     }
 }
