@@ -39,5 +39,10 @@
             </tbody>
         </table>
         {!! $messages->render() !!}
+        @if($smslist->draft)
+            {!! Form::open(array('url' => '/smslist/start_send/'.$smslist->id, 'method' => 'post')) !!}
+            {!! Form::submit('Разослать', ['class' => 'btn btn-danger btn-lg center-block']) !!}
+            {!! Form::close() !!}
+        @endif
     </div>
 @stop

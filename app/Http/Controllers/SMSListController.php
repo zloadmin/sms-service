@@ -159,7 +159,27 @@ class SMSListController extends Controller
     public function view($id)
     {
         $smslist = Auth::user()->smslist()->find($id);
-        $messages = $smslist->messages()->orderBy('need_send', 'asc')->paginate(5);
+        $messages = $smslist->messages()->orderBy('need_send', 'asc')->paginate(50);
         return View('smslist.view', compact('smslist', 'messages'));
+    }
+    public function start_send($id)
+    {
+        Auth::user()->smslist()->find($id)->update(['draft' => false]);
+
+        Auth::user()->smslist()->find($id)->messages()->update(['status' => 2]);
+
+        return redirect('/smslist/view/'.$id);
+    }
+    public function index()
+    {
+        $smslists = Auth::user()->smslist()->where('draft', false)->paginate(50);
+
+        return View('smslist.list', compact('smslists'));
+    }
+    public function index_draft()
+    {
+        $smslists = Auth::user()->smslist()->where('draft', true)->paginate(50);
+
+        return View('smslist.list', compact('smslists'));
     }
 }

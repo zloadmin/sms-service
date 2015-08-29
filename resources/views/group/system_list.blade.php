@@ -23,4 +23,5 @@
         </tbody>
     </table>
     {!! $groups->render() !!}
+
 @stop
