@@ -1,11 +1,12 @@
 @extends('master')
 @section('main')
     <div class="col-md-12">
-        <h1>Сообщение</h1>
-        <blockquote>
+        <h4>Сообщение</h4>
+        <blockquote  class="text-danger">
             {!! $smslist->message !!}
         </blockquote>
-        <table class="table">
+        <h4>Получатели</h4>
+        <table class="table table-condensed table-hover">
             <thead>
             <tr>
                 <th>#</th>
@@ -17,22 +18,25 @@
             <tbody>
                 @foreach($messages as $message)
                     <tr>
-                        <td>{{ $message->id }}</td>
-                        <td>{{ $message->need_send }}</td>
+                        <td><p>{{ $message->id }}</p></td>
+                        <td><p>{{ $message->need_send }}</p></td>
                         <td>
-                            @if($message->type == 1)
-                                {{ substr_replace($message->number, '****', -4) }}
-                            @else
-                                {{ $message->number }}
-                            @endif
-
+                            <p>
+                                @if($message->type == 1)
+                                    {{ substr_replace($message->number, '****', -4) }}
+                                @else
+                                    {{ $message->number }}
+                                @endif
+                            </p>
                         </td>
                         <td>
-                            @if($message->status==1)
-                                <p>Черновик</p>
-                            @elseif($message->status==2)
-                                <p>Отправка</p>
-                            @endif
+                            <p>
+                                @if($message->status==1)
+                                    Черновик
+                                @elseif($message->status==2)
+                                    Отправка
+                                @endif
+                            </p>
                         </td>
                     </tr>
                 @endforeach
