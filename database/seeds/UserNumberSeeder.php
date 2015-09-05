@@ -19,7 +19,6 @@ class UserNumberSeeder extends Seeder
         $faker = Faker::create('ru_RU');
 
 
-
         foreach(User::all() as $user) {
 
             for($i=0;$i<=rand(0,10);$i++) {

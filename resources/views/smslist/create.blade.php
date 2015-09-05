@@ -39,6 +39,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div id="message_panel" class="col-sm-offset-2 col-sm-10">
+                            <span class='hide_if_nojs' id="SMSLengthCounter_message">Всего введено: <font color=red>0</font> символов.</span>
+                            <a class='btn btn-primary' id="translit_button_message" type="button" name="translit_button" >В транслит</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
