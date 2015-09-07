@@ -11,8 +11,7 @@
         "laravelcollective/html": "5.1.*",
         "fzaninotto/faker": "^1.5",
         "propaganistas/laravel-phone": "~2.0",
-        "maatwebsite/excel": "~2.0.0",
-        "patricktalmadge/bootstrapper": "~5"
+        "maatwebsite/excel": "~2.0.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
