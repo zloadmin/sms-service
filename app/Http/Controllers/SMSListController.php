@@ -193,10 +193,18 @@ class SMSListController extends Controller
                     $status = "Отправлено";
                     break;
             }
+
+            if($v->type == 1) {
+                $number = substr_replace($v->number, '****', -4);
+            } else {
+                $number = $v->number;
+            }
+
+
             $all_message[] = [
                 0 => $v->id,
                 1 => $v->need_send,
-                2 => $v->number,
+                2 => $number,
                 3 => $message,
                 4 => $status
             ];
