@@ -149,9 +149,9 @@ class NumbersGroupController extends Controller
 
         if($request->input('format')==="xls") {
 
-            $name = $find->name.".txt";
+            $name = $find->name.".xls";
             $headers = ['Content-Type' => 'text/plain'];
-            $pathToFile = base_path().'/tmp/'.str_random(10).".txt";
+            $pathToFile = base_path().'/tmp/'.str_random(10).".xls";
 
 
 

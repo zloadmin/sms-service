@@ -15,6 +15,7 @@ use Validator;
 use App\Components\CarbonAfternoon;
 use Auth;
 use App\Messages;
+use Excel;
 
 class SMSListController extends Controller
 {
@@ -161,6 +162,68 @@ class SMSListController extends Controller
         $smslist = Auth::user()->smslist()->find($id);
         $messages = $smslist->messages()->orderBy('need_send', 'asc')->paginate(50);
         return View('smslist.view', compact('smslist', 'messages'));
+    }
+    public function download($id)
+    {
+
+        if(!Auth::user()->smslist()->find($id)) return redirect()->back()->with(['error' => 'Ошибка доступа']);
+
+        $message = Auth::user()->smslist()->find($id)->message;
+
+        $messages = Auth::user()->smslist()->find($id)->messages()->get();
+
+
+        $all_message = array();
+
+        $all_message[] = [
+            0 => "ID",
+            1 => "Дата отправки",
+            2 => "Номер телефона",
+            3 => "Сообщение",
+            4 => "Статус"
+        ];
+
+        foreach($messages as $v) {
+
+            switch ($v->status) {
+                case 1:
+                    $status = "Черновик";
+                    break;
+                case 2:
+                    $status = "Отправлено";
+                    break;
+            }
+            $all_message[] = [
+                0 => $v->id,
+                1 => $v->need_send,
+                2 => $v->number,
+                3 => $message,
+                4 => $status
+            ];
+
+        }
+
+
+        $name = "Сообщения";
+        $headers = ['Content-Type' => 'text/plain'];
+        $pathToFile = base_path().'/tmp/'.str_random(10).".xls";
+
+
+        Excel::create($name, function($excel) use($all_message) {
+
+
+            $excel->sheet('Сообщения', function($sheet) use($all_message) {
+
+                $sheet->fromArray($all_message, null, 'A1', false, false);
+
+            });
+
+        })->download('xls');
+
+
+
+
+
     }
     public function start_send($id)
     {

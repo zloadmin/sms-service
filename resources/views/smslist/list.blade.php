@@ -8,6 +8,7 @@
             <th>Добавлено</th>
             <th>Сообщение</th>
             <th>Колчиество получателей</th>
+            <th>Скачать</th>
             <th>Просмотреть</th>
         </tr>
         </thead>
@@ -17,8 +18,9 @@
                 <td>{{ $smslist->id }}</td>
                 <td>{{ $smslist->created_at }}</td>
                 <td>{{ $smslist->message }}</td>
-                <td>кол</td>
-                <td><a href="/smslist/view/{{ $smslist->id }}" class="btn btn-success">Просмотреть</a></td>
+                <td>{{ $smslist->messages()->count() }}</td>
+                <td><a href="/smslist/download/{{ $smslist->id }}" class="btn btn-danger"><span class="glyphicon glyphicon-download-alt"></span> Скачать</a></td>
+                <td><a href="/smslist/view/{{ $smslist->id }}" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Просмотреть</a></td>
             </tr>
         @endforeach
         </tbody>
