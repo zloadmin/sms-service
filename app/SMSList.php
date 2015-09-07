@@ -14,4 +14,12 @@ class SMSList extends Model
     {
         return $this->hasMany('App\Messages', 'smslist');
     }
+    public function scopeDraft($query)
+    {
+        return $query->where('draft', true);
+    }
+    public function scopeNotdraft($query)
+    {
+        return $query->where('draft', false);
+    }
 }

@@ -20,6 +20,7 @@
                 <th>#</th>
                 <th>Название</th>
                 <th>Скачать</th>
+                <th>Количество<br> номеров</th>
                 <th>Удалить</th>
             </tr>
         </thead>
@@ -36,6 +37,9 @@
                                 {!! Form::button('Exel файлом', ['class' => 'btn btn-default', 'value' => 'xls', 'type' => 'submit', 'name' => 'format']) !!}
                             </div>
                         {!! Form::close() !!}
+                    </td>
+                    <td>
+                        {{ $group->numbers()->count() }}
                     </td>
                     <td>
                         {!! Form::open(array('url' => '/number_group/delete/'.$group->id, 'method' => 'delete')) !!}

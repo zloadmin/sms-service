@@ -27,7 +27,7 @@ class NumbersGroupController extends Controller
 
     public function systemindex()
     {
-        $groups = NumbersGroup::where('user_id', '=', '0')->paginate(20);
+        $groups = NumbersGroup::syslist()->paginate(20);
 
         return View::make('group.system_list', compact('groups'));
     }
@@ -44,9 +44,9 @@ class NumbersGroupController extends Controller
     public function system_view($id)
     {
 
-        $name = NumbersGroup::where('user_id', '=', '0')->find($id)->name;
+        $name = NumbersGroup::syslist()->find($id)->name;
 
-        $numbers = NumbersGroup::where('user_id', '=', '0')->find($id)->numbers()->paginate(20);
+        $numbers = NumbersGroup::syslist()->find($id)->numbers()->paginate(20);
 
 
         return View::make('group.system_view', compact('numbers', 'name'));
@@ -177,7 +177,7 @@ class NumbersGroupController extends Controller
     {
         $user_groups =  Auth::user()->numbersgroup()->get();
 
-        $system_groups = NumbersGroup::where('user_id', '=', '0')->get();
+        $system_groups = NumbersGroup::syslist()->get();
 
         return View::make('group.change', compact('user_groups', 'system_groups'));
     }

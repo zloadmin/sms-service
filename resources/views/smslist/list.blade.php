@@ -5,8 +5,9 @@
         <thead>
         <tr>
             <th>#</th>
+            <th>Добавлено</th>
             <th>Сообщение</th>
-            <th>Колчиество номеров</th>
+            <th>Колчиество получателей</th>
             <th>Просмотреть</th>
         </tr>
         </thead>
@@ -14,8 +15,9 @@
         @foreach($smslists as $smslist)
             <tr>
                 <td>{{ $smslist->id }}</td>
+                <td>{{ $smslist->created_at }}</td>
                 <td>{{ $smslist->message }}</td>
-                <td>колво</td>
+                <td>кол</td>
                 <td><a href="/smslist/view/{{ $smslist->id }}" class="btn btn-success">Просмотреть</a></td>
             </tr>
         @endforeach

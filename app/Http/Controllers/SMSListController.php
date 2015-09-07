@@ -172,13 +172,16 @@ class SMSListController extends Controller
     }
     public function index()
     {
-        $smslists = Auth::user()->smslist()->where('draft', false)->paginate(50);
+
+        $smslists = Auth::user()->smslist()->notdraft()->paginate(50);
+
+
 
         return View('smslist.list', compact('smslists'));
     }
     public function index_draft()
     {
-        $smslists = Auth::user()->smslist()->where('draft', true)->paginate(50);
+        $smslists = Auth::user()->smslist()->draft()->paginate(50);
 
         return View('smslist.list', compact('smslists'));
     }

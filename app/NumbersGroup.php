@@ -16,5 +16,8 @@ class NumbersGroup extends Model
         return $this->hasMany('App\Numbers');
     }
 
-
+    public function scopeSyslist($query)
+    {
+        return $query->where('user_id', '=', '0');
+    }
 }
