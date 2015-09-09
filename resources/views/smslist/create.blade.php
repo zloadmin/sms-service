@@ -23,7 +23,7 @@
                         </div>
                         @if($count>=1)
                             <div class="col-sm-2">
-                                <a class="btn btn-primary" href="/number_group/change">Выбрано списков: {{$count}}</a>
+                                <a class="btn btn-primary" href="/number_group/change_system">Выбрано списков: {{$count}}</a>
                             </div>
                             <div class="col-sm-2">
                                 <a class="btn btn-danger" href="/number_group/remove_all_group">Отчистить</a>

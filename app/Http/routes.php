@@ -50,7 +50,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/number_group/send', 'NumbersGroupController@send');
     Route::delete('/number_group/delete/{id}', 'NumbersGroupController@delete');
     Route::post('/number_group/download/{id}', 'NumbersGroupController@download');
-    Route::get('/number_group/change', 'NumbersGroupController@change');
+
+    Route::get('/number_group/change_users', 'NumbersGroupController@change_users');
+    Route::get('/number_group/change_system', 'NumbersGroupController@change_system');
 
     Route::get('/number_group/ajax/add_or_remove_group/{id}', 'NumbersGroupController@ajax_add_or_remove_group');
     Route::get('/number_group/remove_all_group', 'NumbersGroupController@remove_all_group');

@@ -173,14 +173,22 @@ class NumbersGroupController extends Controller
         }
     }
 
-    public function change()
+    public function change_users()
     {
         $user_groups =  Auth::user()->numbersgroup()->get();
 
+
+        return View::make('group.change_users', compact('user_groups'));
+    }
+
+    public function change_system()
+    {
+
         $system_groups = NumbersGroup::syslist()->get();
 
-        return View::make('group.change', compact('user_groups', 'system_groups'));
+        return View::make('group.change_system', compact('system_groups'));
     }
+
     public function ajax_add_or_remove_group($id, Request $request)
     {
 
