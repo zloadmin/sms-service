@@ -46,5 +46,14 @@ return [
         'client_secret' => env('SERVICES_GOOGLE_CLIENT_SECRET', ''),
         'redirect' => env('SERVICES_GOOGLE_REDIRECT', ''),
     ],
-
+    'facebook' => [
+        'client_id' => env('SERVICES_FACEBOOK_CLIENT_ID', ''),
+        'client_secret' => env('SERVICES_FACEBOOK_CLIENT_SECRET', ''),
+        'redirect' => env('SERVICES_FACEBOOK_REDIRECT', ''),
+    ],
+    'twitter' => [
+        'client_id' => env('SERVICES_TWITTER_CLIENT_ID', ''),
+        'client_secret' => env('SERVICES_TWITTER_CLIENT_SECRET', ''),
+        'redirect' => env('SERVICES_TWITTER_REDIRECT', ''),
+    ],
 ];

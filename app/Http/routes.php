@@ -21,12 +21,12 @@ Route::get('/oauth/logout', 'AccountController@getLogout');
 
 Route::get('/oauth/github', 'AccountController@github_redirect');
 Route::get('/oauth/google', 'AccountController@google_redirect');
-
+Route::get('/oauth/facebook', 'AccountController@facebook_redirect');
 
 
 Route::get('/oauth/callback/github', 'AccountController@github');
 Route::get('/oauth/callback/google', 'AccountController@google');
-
+Route::get('/oauth/callback/facebook', 'AccountController@facebook');
 
 
 

@@ -37,6 +37,16 @@ class AccountController extends Controller
         return redirect('/smslist/create');
     }
 
+    //facebook
+    public function facebook_redirect() {
+        return Socialite::with('facebook')->redirect();
+    }
+
+    public function facebook() {
+        $user = Socialite::with('facebook')->user();
+        User::FindOrCreateUserAuth($user, 'facebook');
+        return redirect('/smslist/create');
+    }
 
 
 
