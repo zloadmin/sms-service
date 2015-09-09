@@ -21,6 +21,7 @@
                             <a href="{!!URL::to('oauth/github')!!}" class="btn btn-default">Github</a>
                             <a href="{!!URL::to('oauth/google')!!}" class="btn btn-default">Google+</a>
                             <a href="{!!URL::to('oauth/facebook')!!}" class="btn btn-default">Facebook</a>
+                            <a href="{!!URL::to('oauth/twitter')!!}" class="btn btn-default">Twitter</a>
                         </div>
                     @endif
                 </div>

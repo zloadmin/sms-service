@@ -48,6 +48,16 @@ class AccountController extends Controller
         return redirect('/smslist/create');
     }
 
+    //twitter
+    public function twitter_redirect() {
+        return Socialite::with('twitter')->redirect();
+    }
+
+    public function twitter() {
+        $user = Socialite::with('twitter')->user();
+        User::FindOrCreateUserAuth($user, 'twitter');
+        return redirect('/smslist/create');
+    }
 
 
     public function getLogout() {
