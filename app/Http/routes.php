@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 //    Route::get('/number_group/sessiontest', 'NumbersGroupController@sessiontest');
 
+    Route::get('/profile', 'AccountController@profile');
+    Route::get('/balance', 'AccountController@balance');
+
+
 });
 
 

@@ -28,8 +28,8 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Профиль</li>
-                                <li><a href="page-profile.html"><i class="fa fa-user"></i>Просмотреть профиль</a></li>
-                                <li><a href="page-profile.html"><i class="fa fa-user"></i>Баланс</a></li>
+                                <li><a href="/profile"><i class="fa fa-user"></i> Просмотреть профиль</a></li>
+                                <li><a href="/balance"><i class="fa fa-money"></i> Баланс</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{!!URL::to('oauth/logout')!!}"><i class="fa fa-sign-out"></i>{{ trans('all.logout') }}</a></li>
                             </ul>
