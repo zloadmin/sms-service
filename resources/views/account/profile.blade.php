@@ -1,7 +1,7 @@
 @extends('master')
 @section('main')
 <div class="col-md-5 col-md-offset-3">
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">
                 @if(Auth::user()->nickname)

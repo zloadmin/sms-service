@@ -71,8 +71,9 @@ class AccountController extends Controller
     {
         return View::make('account.profile');
     }
-    public function balance() {
-
+    public function balance()
+    {
+        return View::make('account.balance');
     }
 
 }
