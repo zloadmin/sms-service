@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ trans('message.welcome') }}</title>
     <link href="{{ asset("/static/css/bootstrap.min.css") }}" rel="stylesheet">
+    <link href="{{ asset("/static/css/font-awesome.min.css") }}" rel="stylesheet">
     <link href="{{ asset("/static/css/jquery.datetimepicker.css") }}" rel="stylesheet">
     <link href="{{ asset("/static/css/style.css") }}" rel="stylesheet">
 </head>

@@ -94,3 +94,28 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
+.avatar img {
+    width: 35px;
+    height: 35px;
+}
+.navbar-right .dropdown {
+    height: 65px;
+}
+.gpi, .fbi, .twi, .ghi {
+    width: 65px;
+}
+.fbi {
+    background: #3B5998;
+}
+.gpi {
+    background: #DC4A38;
+}
+.twi {
+    background: #06F;
+}
+.ghi {
+    background: #4078C0;
+}
+.fbi i, .gpi i, .twi i, .ghi i {
+    font-size: 35px;
+}
